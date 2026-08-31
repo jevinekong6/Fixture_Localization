@@ -8,9 +8,6 @@ For each detection:
     X = (u - cx) * Z / fx
     Y = (v - cy) * Z / fy
 
-apparent_size_px is chosen per-class via FIXTURE_DIMENSIONS in
-fixture_config.py ("max" bbox dimension is the default -- see that file for
-why it's recommended for roughly circular/symmetric fixtures).
 
 Usage:
     python localize_fixtures_pinhole.py --query_dir query_capture --outfile results.csv
