@@ -1,0 +1,151 @@
+# Real-world fixture sizes, one entry per YOLO class.
+#
+# ===========================================================================
+# READ THIS BEFORE YOU TYPE A NUMBER
+# ===========================================================================
+#
+# 1. width_m IS NOT THE CATALOG DIMENSION OF THE PART.
+#
+#    It is the physical extent that the DETECTOR'S BOUNDING BOX ENCLOSES.
+#    Those are frequently different things, and the difference goes straight
+#    into the range estimate at 100% scale: Z = f * width_m / w_px, so a
+#    width_m that is 20% too large puts every landmark of that class 20% too
+#    far away, consistently, forever. It will not average out over frames, and
+#    no amount of extra observations will find it -- it is a bias, not noise.
+#
+#    Concretely:
+#      * If your labellers boxed a valve wheel by its rim, width_m is the rim
+#        outside diameter. If they boxed the whole assembly including the
+#        mounting plate, width_m is the plate.
+#      * If the training boxes are tight to the visible silhouette and the
+#        part has a hub that sticks toward the camera, the box encloses the
+#        silhouette, not the depth.
+#      * A handle labelled with its grip only is not the same as a handle
+#        labelled with its mounting feet.
+#
+#    THE RELIABLE WAY TO GET THIS RIGHT: put the fixture at a tape-measured
+#    range, run one detection, and use scripts/check_frames.py with --bbox and
+#    --true-range. It prints the width_m that would have made that estimate
+#    exact. If that number is physically plausible for what the box encloses,
+#    use it -- it is a measurement of your detector's actual labelling
+#    convention, which is better than any number off a drawing.
+#
+# 2. THE CLASS KEYS MUST MATCH THE YOLO class_id STRINGS EXACTLY.
+#
+#    The node looks up vision_msgs ObjectHypothesis.class_id verbatim in this
+#    mapping. Case, underscores and hyphens all matter: "valve_wheel" is not
+#    "valve wheel" and is not "ValveWheel". A mismatch is not a crash -- the
+#    detection is skipped with a throttled warning, so a typo here presents as
+#    "my fixture never shows up in RViz" rather than as an error. Check the
+#    node's log for "not in class_config" before you suspect anything else.
+#
+#    Some detectors publish NUMERIC class ids as strings ("0", "1", ...). If
+#    yours does, the keys here must be those numerals, quoted.
+#
+# ---------------------------------------------------------------------------
+# Fields per class:
+#   width_m         real horizontal extent the box encloses, metres. REQUIRED.
+#   height_m        real vertical extent the box encloses, metres. Optional;
+#                   used when prefer: height.
+#   prefer          "width" (default) or "height" -- which one drives range.
+#   nominal_aspect  expected width/height of the box seen square-on. Optional.
+#                   Only feeds the obliquity WARNING; nothing is corrected by
+#                   it, and it is meaningless for round fixtures (a knob has
+#                   no detectable long axis, so its aspect tells you nothing
+#                   about how oblique it is). Leave it out for those.
+# ---------------------------------------------------------------------------
+
+
+# SOURCE OF THESE NUMBERS
+#
+# The class keys below are LASR-CV_App/config.py OBJ_CLASSES verbatim -- that is
+# what the trained model at train/runs/fixture_recognition_9/weights/best.pt
+# actually emits, so those are the strings that must appear here.
+#
+# The sizes are reconciled from the two tables that already existed:
+#   * LASR-CV_App/3D_run_live.py FIXTURE_DIMS, which is (h, w, l) in metres
+#   * Fixture_Localization/fixture_config.py FIXTURE_DIMENSIONS, real_size_m
+#
+# THE MAPPING IS NOT A COPY-PASTE. FIXTURE_DIMS is an object-dimension triple;
+# width_m here is a PROJECTED extent. For a fixture mounted face-on to the
+# camera -- which is how a wheel, a marman ring or a snowflake sits on a panel
+# -- the box height in pixels spans the fixture's DIAMETER, not its axial
+# thickness. So a wheel at (h=0.04, w=0.09, l=0.09) gives width_m 0.09 AND
+# height_m 0.09; the 0.04 is thickness pointing at the lens and never appears
+# in the box at all.
+#
+# EVERY NUMBER HERE IS STILL PROVISIONAL until it has been checked against a
+# tape measure or ZED stereo depth. See the README for the calibration loop.
+
+classes:
+
+  # --- round / rotationally symmetric ------------------------------------- #
+  # No nominal_aspect on any of these on purpose: the obliquity proxy is
+  # meaningless without a detectable long axis.
+
+  wheel:
+    width_m: 0.090        # rim outside diameter. Agrees across both tables.
+    height_m: 0.090       # diameter again, NOT the 0.04 axial thickness.
+    prefer: width
+
+  knob:
+    width_m: 0.060        # agrees across both tables
+    height_m: 0.060
+    prefer: width
+
+  marman_ring:
+    width_m: 0.100        # clamp band outside diameter. Agrees.
+    height_m: 0.100
+    prefer: width
+
+  snowflake:
+    width_m: 0.130        # agrees
+    height_m: 0.120
+    prefer: width
+
+  oblique_knob:
+    # CONFLICT: fixture_config.py says real_size_m 0.063; FIXTURE_DIMS is
+    # (0.1, 0.063, 0.06), whose largest extent is 0.1. Taking 0.063 as the
+    # projected width and 0.1 as the projected height, i.e. reading the 0.1 as
+    # a vertical stem rather than a diameter. VERIFY THIS ONE FIRST -- a 59%
+    # disagreement between your own two tables is a 59% range error.
+    width_m: 0.063
+    height_m: 0.100
+    prefer: width
+
+  rocket_nozzle:
+    # CONFLICT: fixture_config.py says 0.07; FIXTURE_DIMS (0.08, 0.07, 0.07)
+    # makes the largest extent 0.08. Reading 0.07 as the bell diameter and
+    # 0.08 as the axial length seen side-on. VERIFY.
+    width_m: 0.070
+    height_m: 0.080
+    prefer: width
+
+  # --- fixtures with a real long axis -------------------------------------- #
+  # These get a nominal_aspect, because a squashed box here is genuine
+  # evidence of obliquity rather than noise.
+
+  handle:
+    width_m: 0.080        # grip length. Agrees across both tables.
+    height_m: 0.060       # FIXTURE_DIMS h = 0.06
+    prefer: width
+    nominal_aspect: 1.33  # 0.080 / 0.060
+
+  eva_handle:
+    width_m: 0.090        # agrees
+    height_m: 0.040       # FIXTURE_DIMS h = 0.04
+    prefer: width
+    nominal_aspect: 2.25  # 0.090 / 0.040
+
+  # --- deliberately absent -------------------------------------------------- #
+  #
+  # tensegrity  is in OBJ_CLASSES, so the model can emit it, but it has NO
+  #             entry in FIXTURE_DIMS and none in fixture_config.py. It is left
+  #             out rather than given a guessed size. An absent class produces
+  #             a throttled "not in class_config" warning and the detection is
+  #             skipped -- loud and harmless. A guessed width_m would instead
+  #             place a confident landmark in the wrong spot, which is silent
+  #             and harmful. Measure it, then add it.
+  #
+  # buddha      is in FIXTURE_DIMS but NOT in OBJ_CLASSES, so the trained model
+  #             cannot emit it. Left out as dead config.

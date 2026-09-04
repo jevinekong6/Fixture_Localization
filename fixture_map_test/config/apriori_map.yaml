@@ -1,0 +1,34 @@
+# Apriori fixture map: where CAD or a survey says the fixtures are.
+#
+# Positions are in the `frame_id` below, metres. These are AUTHORITATIVE. The
+# node never overwrites them from observation -- when an observation disagrees
+# by more than confirm_radius, the landmark is FLAGGED (red in RViz, a warn in
+# the log, a max_residual in the output map) and a human decides whether the
+# drawing or the estimator is wrong.
+#
+# The class strings here must match the keys in fixture_classes.yaml and the
+# YOLO class_id strings, exactly. Association is within-class, so a class
+# mismatch here means the CAD entry can never be confirmed by anything.
+#
+# sigma is the 1-sigma position uncertainty of the SURVEY, not of the camera.
+# For a CAD position on a rigid panel a centimetre or two is realistic; if you
+# paced it out, say so and put 0.1 in.
+#
+# Replace both entries below with your measured fixture positions.
+
+frame_id: map
+
+landmarks:
+
+  - id: wheel_cad_01
+    class: wheel
+    position: [2.00, 0.00, 1.15]   # PLACEHOLDER: 2 m ahead of the map origin,
+                                   # 1.15 m up. Measure yours.
+    origin: apriori
+    sigma: 0.01
+
+  - id: knob_cad_01
+    class: knob
+    position: [2.00, 0.35, 0.95]   # PLACEHOLDER
+    origin: apriori
+    sigma: 0.01
