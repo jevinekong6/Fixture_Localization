@@ -25,6 +25,7 @@ setup(
     entry_points={
         "console_scripts": [
             "yolo_node = lasr_perception.yolo_node:main",
+            "capture_player = lasr_perception.capture_player_node:main",
         ],
     },
 )
