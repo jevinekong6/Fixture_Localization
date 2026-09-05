@@ -156,7 +156,7 @@ def main() -> int:
     ap.add_argument("--side", choices=("left", "right"), default="left",
                     help="fixture_map_test consumes the LEFT rectified image; "
                          "only change this if you have remapped it")
-    ap.add_argument("--board-half-height", type=float, default=None,
+    ap.add_argument("--board-half-height", type=float, default=0.292,
                     help="half the vertical extent of your fixture board, in "
                          "metres. Prints the minimum tripod standoff.")
     args = ap.parse_args()
