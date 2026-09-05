@@ -267,8 +267,8 @@ def main() -> int:
         print(f"        pixel   u={u:7.1f} v={v:7.1f}   off-axis "
               f"h={ang_h:+.1f}deg v={ang_v:+.1f}deg  (half-FOV h~{half_fov_h:.0f}deg)")
 
-        in_frame = 0.0 <= u < img_w and 0.0 <= v < img_h
-        if not in_frame:
+        centre_in = 0.0 <= u < img_w and 0.0 <= v < img_h
+        if not centre_in:
             note(FAIL, f"projects OFF the {img_w}x{img_h} image -- the camera "
                        f"cannot see this fixture from this pose")
 
@@ -294,6 +294,25 @@ def main() -> int:
         print(f"        expect  box {w_px:.0f} px wide (width_m={W})   "
               f"sigma_Z {est.sigma_z:.4f} m")
 
+        # The BOX has to fit, not just its centre. A fixture whose centre is
+        # a few pixels inside the edge still has half its box off-image: the
+        # detector usually will not fire on a truncated object at all, and if
+        # it does, the clipped box is SMALLER than the real one, which reads
+        # as farther away. Testing the centre alone passes exactly the poses
+        # that then produce nothing in RViz.
+        h_px = intr.fy * float(spec.get("height_m") or W) / z
+        margin = min(u - w_px / 2.0, img_w - (u + w_px / 2.0),
+                     v - h_px / 2.0, img_h - (v + h_px / 2.0))
+        box_fits = margin >= 0.0
+        if centre_in and not box_fits:
+            over = -margin
+            note(FAIL, f"predicted box is CLIPPED by {over:.0f} px ({100*over/max(w_px,h_px):.0f}% "
+                       f"of it) -- the centre is in frame but the box is not. Expect no "
+                       f"detection, or a truncated box that reads as farther away.")
+        elif box_fits and margin < args.min_box_px:
+            note(WARN, f"box clears the image edge by only {margin:.0f} px -- any "
+                       f"small pose error or lens distortion pushes it out")
+
         if w_px < args.min_box_px:
             note(WARN, f"predicted box is only {w_px:.0f} px -- below "
                        f"{args.min_box_px:.0f} px the detector is unreliable and "
@@ -305,7 +324,8 @@ def main() -> int:
                        f"{args.confirm_radius:.2f} m -- this landmark can never be "
                        f"CONFIRMED, only FLAGGED. Move inside {z_max:.2f} m, or "
                        f"raise confirm_radius.")
-        clean = (in_frame and z <= args.max_range
+        clean = (centre_in and box_fits and margin >= args.min_box_px
+                 and z <= args.max_range
                  and w_px >= args.min_box_px
                  and est.sigma_z <= args.confirm_radius)
         if clean:
