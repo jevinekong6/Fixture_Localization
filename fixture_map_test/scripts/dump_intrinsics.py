@@ -167,15 +167,32 @@ def main() -> int:
     finally:
         cam.close()
 
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    with open(args.out, "w") as f:
-        json.dump(intr, f, indent=2)
-        f.write("\n")
-
+    # Report BEFORE writing. Opening the camera is the slow, failure-prone
+    # part; a bad --out path must not throw away a reading that already
+    # succeeded -- the numbers are on screen either way.
     print(f"ZED intrinsics  [{source}]")
     describe(intr, args.board_half_height)
     print()
-    print(f"  wrote {args.out}")
+
+    out = args.out
+    if out.is_dir() or str(out).endswith(("/", "\\")):
+        # A directory was given rather than a file. Do the obvious thing
+        # instead of raising PermissionError, which is what open() on a
+        # directory reports and which reads like a filesystem problem.
+        out = out / "intrinsics.json"
+
+    try:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with open(out, "w") as f:
+            json.dump(intr, f, indent=2)
+            f.write("\n")
+    except OSError as exc:
+        print(f"  COULD NOT WRITE {out}: {exc}")
+        print("  The calibration above is still correct -- copy it by hand, or")
+        print("  re-run with --out pointing at a writable FILE path.")
+        return 1
+
+    print(f"  wrote {out}")
     print()
     print("  Next:")
     print(f"     python3 scripts/check_pose.py --intrinsics {args.out} \\")
