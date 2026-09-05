@@ -40,7 +40,17 @@ landmarks:
     origin: apriori
     sigma: 0.01
 
-  #removed marman ring and snowflake for testing
+  - id: snowflake_cad_01
+    class: snowflake
+    position: [-0.1, 0.14, 0.0]
+    origin: apriori
+    sigma: 0.01
+
+  - id: marman_ring_cad_01
+    class: marman_ring
+    position: [-0.06, -0.14, 0.0]
+    origin: apriori
+    sigma: 0.01
    
   - id: rocket_nozzle_cad_01
     class: rocket_nozzle
