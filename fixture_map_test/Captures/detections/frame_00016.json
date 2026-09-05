@@ -1,0 +1,66 @@
+[
+  {
+    "class_id": 2,
+    "class_name": "knob",
+    "confidence": 0.7574964165687561,
+    "bbox_xyxy": [
+      934,
+      55,
+      1106,
+      275
+    ],
+    "centroid_px": [
+      1020,
+      165
+    ],
+    "zed_depth_m": 0.600442111492157
+  },
+  {
+    "class_id": 8,
+    "class_name": "marman_ring",
+    "confidence": 0.6933029890060425,
+    "bbox_xyxy": [
+      1129,
+      541,
+      1511,
+      867
+    ],
+    "centroid_px": [
+      1320,
+      704
+    ],
+    "zed_depth_m": 0.6622112989425659
+  },
+  {
+    "class_id": 4,
+    "class_name": "wheel",
+    "confidence": 0.4213322103023529,
+    "bbox_xyxy": [
+      1338,
+      65,
+      1606,
+      332
+    ],
+    "centroid_px": [
+      1472,
+      198
+    ],
+    "zed_depth_m": 0.6179137229919434
+  },
+  {
+    "class_id": 6,
+    "class_name": "snowflake",
+    "confidence": 0.4206168055534363,
+    "bbox_xyxy": [
+      501,
+      526,
+      828,
+      818
+    ],
+    "centroid_px": [
+      664,
+      672
+    ],
+    "zed_depth_m": 0.5927883982658386
+  }
+]

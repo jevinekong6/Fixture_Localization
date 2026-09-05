@@ -1,6 +1,126 @@
 [
   {
     "frame": "frame_00000",
+    "n_detections": 2
+  },
+  {
+    "frame": "frame_00001",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00002",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00003",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00004",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00005",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00006",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00007",
+    "n_detections": 2
+  },
+  {
+    "frame": "frame_00008",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00009",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00010",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00011",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00012",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00013",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00014",
+    "n_detections": 2
+  },
+  {
+    "frame": "frame_00015",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00016",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00017",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00018",
+    "n_detections": 2
+  },
+  {
+    "frame": "frame_00019",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00020",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00021",
+    "n_detections": 2
+  },
+  {
+    "frame": "frame_00022",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00023",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00024",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00025",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00026",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00027",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00028",
+    "n_detections": 4
+  },
+  {
+    "frame": "frame_00029",
+    "n_detections": 3
+  },
+  {
+    "frame": "frame_00030",
     "n_detections": 3
   }
 ]

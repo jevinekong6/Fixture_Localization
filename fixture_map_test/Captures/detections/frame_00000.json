@@ -2,50 +2,33 @@
   {
     "class_id": 8,
     "class_name": "marman_ring",
-    "confidence": 0.7179322242736816,
+    "confidence": 0.7070115208625793,
     "bbox_xyxy": [
-      1154,
-      536,
-      1480,
-      857
+      1137,
+      543,
+      1509,
+      860
     ],
     "centroid_px": [
-      1317,
-      696
+      1323,
+      701
     ],
-    "zed_depth_m": 0.6622845530509949
-  },
-  
-  {
-    "class_id": 6,
-    "class_name": "snowflake",
-    "confidence": 0.703812301158905,
-    "bbox_xyxy": [
-      505,
-      486,
-      830,
-      839
-    ],
-    "centroid_px": [
-      667,
-      662
-    ],
-    "zed_depth_m": 0.5952357649803162
+    "zed_depth_m": 0.6623479127883911
   },
   {
-    "class_id": 4,
-    "class_name": "wheel",
-    "confidence": 0.6124948263168335,
+    "class_id": 2,
+    "class_name": "knob",
+    "confidence": 0.6622050404548645,
     "bbox_xyxy": [
-      1333,
-      65,
-      1604,
-      333
+      938,
+      53,
+      1104,
+      278
     ],
     "centroid_px": [
-      1468,
-      199
+      1021,
+      165
     ],
-    "zed_depth_m": 0.6168153285980225
+    "zed_depth_m": 0.6012763977050781
   }
 ]
