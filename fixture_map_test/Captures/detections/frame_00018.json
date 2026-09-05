@@ -1,0 +1,34 @@
+[
+  {
+    "class_id": 8,
+    "class_name": "marman_ring",
+    "confidence": 0.7236996293067932,
+    "bbox_xyxy": [
+      1132,
+      540,
+      1510,
+      869
+    ],
+    "centroid_px": [
+      1321,
+      704
+    ],
+    "zed_depth_m": 0.6622647047042847
+  },
+  {
+    "class_id": 2,
+    "class_name": "knob",
+    "confidence": 0.6778300404548645,
+    "bbox_xyxy": [
+      939,
+      61,
+      1100,
+      279
+    ],
+    "centroid_px": [
+      1019,
+      170
+    ],
+    "zed_depth_m": 0.6007700562477112
+  }
+]

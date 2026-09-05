@@ -42,7 +42,7 @@ landmarks:
 
   - id: snowflake_cad_01
     class: snowflake
-    position: [-0.1, 0.14, 0.0]
+    position: [-0.1, 0.14, 0.05]
     origin: apriori
     sigma: 0.01
 

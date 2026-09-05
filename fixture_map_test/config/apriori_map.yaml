@@ -28,34 +28,15 @@ landmarks:
     origin: apriori 
     sigma: 0.01
 
-  - id: eva_handle_cad_01
-    class: eva_handle
-    position: [-0.06, 0.21, 0.22]
+  - id: snowflake_cad_01
+    class: snowflake
+    position: [-0.1, 0.14, 0.05]
     origin: apriori
     sigma: 0.01
 
-  - id: handle_cad_01
-    class: handle
-    position: [-0.06, 0.0, 0.24]
+  - id: marman_ring_cad_01
+    class: marman_ring
+    position: [-0.06, -0.14, 0.0]
     origin: apriori
     sigma: 0.01
-
-  #removed marman ring and snowflake for testing
-   
-  - id: rocket_nozzle_cad_01
-    class: rocket_nozzle
-    position: [-0.07, 0.22, -0.22]
-    origin: apriori
-    sigma: 0.01
-
-  - id: oblique_knob_cad_01
-    class: oblique_knob
-    position: [-0.1, -0.2, -0.22]
-    origin: apriori
-    sigma: 0.01
-
-  - id: knob_cad_01
-    class: knob
-    position: [-0.07, 0.0, -0.22] 
-    origin: apriori
-    sigma: 0.01
+       
