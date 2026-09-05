@@ -185,9 +185,9 @@ def main() -> int:
     ap.add_argument("--classes", type=Path,
                     default=_PKG_ROOT / "config" / "fixture_classes.yaml")
 
-    ap.add_argument("--cam-x", type=float, default=-0.6)
+    ap.add_argument("--cam-x", type=float, default=-0.673)
     ap.add_argument("--cam-y", type=float, default=0.0)
-    ap.add_argument("--cam-z", type=float, default=0.0)
+    ap.add_argument("--cam-z", type=float, default=0.076)
     ap.add_argument("--cam-yaw", type=float, default=0.0)
     ap.add_argument("--cam-pitch", type=float, default=0.0)
     ap.add_argument("--cam-roll", type=float, default=0.0)
