@@ -21,11 +21,11 @@ def generate_launch_description():
 
     args = [
         # --- measured tripod pose, map -> camera BODY origin -------------- #
-        DeclareLaunchArgument("cam_x", default_value="0.0",
+        DeclareLaunchArgument("cam_x", default_value="-0.40",
                               description="tripod x in the map frame, metres"),
         DeclareLaunchArgument("cam_y", default_value="0.0",
                               description="tripod y in the map frame, metres"),
-        DeclareLaunchArgument("cam_z", default_value="1.20",
+        DeclareLaunchArgument("cam_z", default_value="0.0",
                               description="camera height above the map plane, metres"),
         DeclareLaunchArgument("cam_yaw", default_value="0.0",
                               description="tripod yaw, radians, right-handed about map +z"),
