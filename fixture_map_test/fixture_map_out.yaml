@@ -1,0 +1,68 @@
+frame_id: map
+landmarks:
+- id: wheel_cad_01
+  class: wheel
+  position:
+  - -0.06
+  - -0.21
+  - 0.22
+  origin: apriori
+  sigma: 0.01
+  n_obs: 0
+  patches: []
+  max_residual: 0.0
+- id: eva_handle_cad_01
+  class: eva_handle
+  position:
+  - -0.06
+  - 0.21
+  - 0.22
+  origin: apriori
+  sigma: 0.01
+  n_obs: 0
+  patches: []
+  max_residual: 0.0
+- id: handle_cad_01
+  class: handle
+  position:
+  - -0.06
+  - 0.0
+  - 0.24
+  origin: apriori
+  sigma: 0.01
+  n_obs: 0
+  patches: []
+  max_residual: 0.0
+- id: rocket_nozzle_cad_01
+  class: rocket_nozzle
+  position:
+  - -0.07
+  - 0.22
+  - -0.22
+  origin: apriori
+  sigma: 0.01
+  n_obs: 0
+  patches: []
+  max_residual: 0.0
+- id: oblique_knob_cad_01
+  class: oblique_knob
+  position:
+  - -0.1
+  - -0.2
+  - -0.22
+  origin: apriori
+  sigma: 0.01
+  n_obs: 0
+  patches: []
+  max_residual: 0.0
+- id: knob_cad_01
+  class: knob
+  position:
+  - -0.07
+  - 0.0
+  - -0.22
+  origin: apriori
+  sigma: 0.01
+  n_obs: 0
+  patches: []
+  max_residual: 0.0
